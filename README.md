@@ -16,15 +16,15 @@ forking or recompilation. You even don't need to restart the process at all.
 
 ## Milestones and features
 
-[x] find a cool name and define project goals  
-[ ] embedding files into byte slices    
-[ ] parse templates at processing time and fail early  
-[ ] using non-embedded files in development mode  
-[ ] overlay resources from different origins  
-[ ] fsnotify in release and development mode  
-[ ] localized resources  
-[ ] multi-client/multi-tenant resources  
-[ ] build variants and exclude resources by compilation flag  
-[ ] basic localization using android strings format  
-[ ] android string plurals and non-translatable texts  
-[ ] generate type safe interfaces to use parameterized strings safely and let compiler do the type checks 
+- [x] find a cool name and define project goals  
+- [ ] embedding files into byte slices    
+- [ ] parse templates at processing time and fail early  
+- [ ] using non-embedded files in development mode  
+- [ ] overlay resources from different origins  
+- [ ] fsnotify in release and development mode  
+- [ ] localized resources  
+- [ ] multi-client/multi-tenant resources  
+- [ ] build variants and exclude resources by compilation flag  
+- [ ] basic localization using android strings format  
+- [ ] android string plurals and non-translatable texts  
+- [ ] generate type safe interfaces to use parameterized strings safely and let compiler do the type checks 
