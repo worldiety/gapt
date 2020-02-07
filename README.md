@@ -27,4 +27,11 @@ forking or recompilation. You even don't need to restart the process at all.
 - [ ] build variants and exclude resources by compilation flag  
 - [ ] basic localization using android strings format  
 - [ ] android string plurals and non-translatable texts  
-- [ ] generate type safe interfaces to use parameterized strings safely and let compiler do the type checks 
+- [ ] generate type safe interfaces to use parameterized strings safely and let compiler do the type checks
+
+
+## FAQ
+
+### How does it work with modules?
+Modules will contain the generated type safe accessors and will register them self at the AssetManager
+which provides a central *fnotify* infrastructure and aggregates an aggregated view over all resources. 
