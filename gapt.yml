@@ -5,5 +5,5 @@ exclude:
 - '*.md'
 - '*.go'
 - '*.mod'
-- '*license'
+- license
 - '*.sum'

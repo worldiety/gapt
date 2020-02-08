@@ -15,19 +15,18 @@ type fResource struct {
 
 // A Project represents the go project whose resources needs to be processed.
 type Project struct {
-	root      string
-	pkg       *Package
-	config    *Config
-	resources []Resource
+	root   string
+	pkg    *Package
+	config *Config
 }
 
 // NewProject parses the given directory as a go module.
 func NewProject(dir string) (*Project, error) {
-	pkg, err := GoList(dir)
+	_, err := GoList(dir)
 	if err != nil {
 		return nil, fmt.Errorf("not a go module: %s: %w", dir, err)
 	}
-
+	return nil, nil
 }
 
 // Collect
@@ -58,14 +57,14 @@ func collect(root string) ([]string, error) {
 			return nil
 		}
 		if info.Mode().IsRegular() {
-			lcase := strings.ToLower(info.Name())
+			//lcase := strings.ToLower(info.Name())
 			allowed := true
-			for _, ext := range ignoreFileExt {
+			/*for _, ext := range ignoreFileExt {
 				if strings.HasSuffix(lcase, ext) {
 					allowed = false
 					break
 				}
-			}
+			}*/
 			if allowed {
 				res = append(res, path)
 			}

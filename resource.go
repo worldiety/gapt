@@ -1,23 +1,10 @@
 package gapt
 
 import (
-	"html/template"
 	"io"
 )
 
-type Folder struct {
-	Name    string // like templates
-	Files   []*File
-	Folders []*Folder
-}
 
-type File struct {
-	Name     string             // like users.gohtml
-	Cached   []byte             //only if cached?
-	template *template.Template // only if template?
-
-	Blob Blob
-}
 
 // A Blob can be
 //  a local file in the source project
