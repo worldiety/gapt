@@ -35,12 +35,66 @@ forking or recompilation. You even don't need to restart the process at all.
 ### How does it work with modules?
 Modules will contain the generated type safe accessors and will register them self at the AssetManager
 which provides a central *fnotify* infrastructure and aggregates an aggregated view over all resources. 
+Each virtual tree may have an overlay by a local file system tree. 
 
-The namespace of each resource must be the same of the module, however a module can define files
-for other namespace to overload the content. It may add, update or remove files or folders. The order
-is defined by package registration time and can be determined by unnamed imports and should only be
-done at the main project level.
+Resources of GAPT are organized and accessed within a single virtual filesystem of 
+[http.FileSystem](https://golang.org/pkg/net/http/#FileSystem). The convention is the following: 
+```
+/ 
+│
+└───www
+│   │   app.wasm
+│   │   style.css
+│   │   ...
+│   │
+│   └───js
+│       │   app.js
+│       │   libXY.js
+│       │   ...
+│   
+└───tmpl
+|   │   header.gohtml
+|   │   footer.gohtml
+│   │   ...
+│   │
+│   └───user
+│           show.gohtml
+│           list.gohtml
+│           ...
+└───etc
+|   │   myproject-config.json
+│           ...
+|
+└───values
+│   │   hello_world
+│   │   ...
+|   |   
+└───values-de-DE
+│   │   hello_world
+│   └───github.com
+│   |   └─── mycompany
+│   |        └─── myproject
+│   |                 userName
+│   |                 password
+│   │                 ...
+|   |   
+``` 
+The `www`-folder is always published over http as root. All other files and folders should never
+be made accessible through the web server. Localized values are also handled as files, however the according `File`
+implementation will provide an efficient shortcut. In general, as a convention, a module should fan out their data
+with their actual module name. Strings within the values folder are just plain simple utf-8 byte
+sequences, with optional positional placeholders. Plurals and gender variants need still to be defined
+but will likely be represented by a json format, e.g. indicated by *.pl* extension.
 
+DSL proposal
+```bash
+# ADD <namespace>:<src>
+# $local denotes the local module name 
+ADD $local:*.gotmpl :.
+ADD config/etc/colors.xml .
+```
+
+JSON proposal
 ```json
 {
   ".": {
