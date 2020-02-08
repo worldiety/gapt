@@ -35,3 +35,21 @@ forking or recompilation. You even don't need to restart the process at all.
 ### How does it work with modules?
 Modules will contain the generated type safe accessors and will register them self at the AssetManager
 which provides a central *fnotify* infrastructure and aggregates an aggregated view over all resources. 
+
+The namespace of each resource must be the same of the module, however a module can define files
+for other namespace to overload the content. It may add, update or remove files or folders. The order
+is defined by package registration time and can be determined by unnamed imports and should only be
+done at the main project level.
+
+```json
+{
+  ".": {
+    "add": ["*.gotmpl","config/etc/colors.xml"],
+    "ignore": ["users/test.gotmpl"]
+  },
+  "github.com/mycompany/privateprj": {
+    "remove": ["groups/layout.xml"],
+    "add": ["customization/stuff/*"]
+  }
+}
+```

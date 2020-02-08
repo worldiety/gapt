@@ -1,6 +1,7 @@
 package gapt
 
 import (
+	"github.com/worldiety/gapt/unix"
 	"net/http"
 	"os"
 	"time"
@@ -18,9 +19,9 @@ func (f *Filesystem) Open(name string) (http.File, error) {
 var _ http.File = (*File)(nil)
 
 type File struct {
-	name string
-	dir bool
-	lastMod int64
+	name    string
+	dir     bool
+	lastMod unix.Time
 }
 
 func (f *File) Name() string {
@@ -32,15 +33,15 @@ func (f *File) Size() int64 {
 }
 
 func (f *File) Mode() os.FileMode {
-	if f.dir{
+	if f.dir {
 		return os.ModeDir
-	}else{
+	} else {
 		return 0
 	}
 }
 
 func (f *File) ModTime() time.Time {
-	time.Unix()
+	f.lastMod.Time()
 }
 
 func (f *File) IsDir() bool {
@@ -48,7 +49,7 @@ func (f *File) IsDir() bool {
 }
 
 func (f *File) Sys() interface{} {
-	panic("implement me")
+	return nil
 }
 
 func (f *File) Close() error {
@@ -68,5 +69,5 @@ func (f *File) Readdir(count int) ([]os.FileInfo, error) {
 }
 
 func (f *File) Stat() (os.FileInfo, error) {
-	return f,nil
+	return f, nil
 }
