@@ -2,15 +2,14 @@ package gapt
 
 import (
 	"fmt"
-	"github.com/kelseyhightower/envconfig"
 	"gopkg.in/yaml.v2"
 	"io"
 	"os"
 )
 
 type Config struct {
-	Include []string `yaml:"include",envconfig:"GAPT_INCLUDE"`
-	Exclude []string `yaml:"exclude",envconfig:"GAPT_EXCLUDE"`
+	Include []string
+	Exclude []string
 }
 
 func (c *Config) Default() {

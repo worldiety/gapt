@@ -2,6 +2,7 @@ package gapt
 
 import (
 	"fmt"
+	"github.com/worldiety/tools"
 	"os"
 	"path/filepath"
 	"strings"
@@ -16,13 +17,13 @@ type fResource struct {
 // A Project represents the go project whose resources needs to be processed.
 type Project struct {
 	root   string
-	pkg    *Package
+	pkg    *tools.Package
 	config *Config
 }
 
 // NewProject parses the given directory as a go module.
 func NewProject(dir string) (*Project, error) {
-	_, err := GoList(dir)
+	_, err := tools.GoList(dir, true)
 	if err != nil {
 		return nil, fmt.Errorf("not a go module: %s: %w", dir, err)
 	}
@@ -74,23 +75,3 @@ func collect(root string) ([]string, error) {
 	return res, err
 }
 
-func main() {
-	dir, err := os.Getwd()
-	if err != nil {
-		panic(dir)
-	}
-	files, err := collect(dir)
-	if err != nil {
-		panic(err)
-	}
-	for _, file := range files {
-		fmt.Println(file[len(dir):])
-	}
-
-	pkg, err := GoList(dir)
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Println(pkg.String())
-}

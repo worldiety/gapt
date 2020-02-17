@@ -1,9 +1,0 @@
-include:
-- '*'
-exclude:
-- makefile
-- '*.md'
-- '*.go'
-- '*.mod'
-- license
-- '*.sum'

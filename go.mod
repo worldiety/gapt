@@ -3,6 +3,6 @@ module github.com/worldiety/gapt
 go 1.13
 
 require (
-	github.com/kelseyhightower/envconfig v1.4.0
-	gopkg.in/yaml.v2 v2.2.8
+	github.com/orcaman/writerseeker v0.0.0-20180723184025-774071c66cec // indirect
+	github.com/worldiety/tools v0.0.0-20200212095042-da9114d80da1
 )
